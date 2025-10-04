@@ -52,19 +52,11 @@ const chapters: Chapter[] = [
     highlights: ['Ancient Lake Bed', 'River Delta', 'Clay & Carbonate Minerals'],
   },
   {
-    badge: 'Chapter 3: The Challenge',
-    title: 'Understanding Mars Environment',
-    text: "Mars presents extreme challenges: temperatures ranging from -125°C to 20°C, a thin atmosphere that's 95% carbon dioxide, intense radiation exposure, and massive dust storms that can engulf the entire planet. Understanding these conditions is crucial for any sustainable human presence and waste management system.",
-    video: '/videos/mars-environment.mp4',
-    icon: ScienceIcon,
-    highlights: ['Extreme Temperatures', 'Thin Atmosphere', 'Radiation Exposure'],
-  },
-  {
     badge: 'Interactive Exploration',
     title: 'Explore Mars Resources',
     isInteractive: true,
     icon: TerrainIcon,
-    marsImage: '/src/images/jazero.jpg',
+    marsImage: '/images/jazero.jpg',
     hotspots: [
       {
         id: 'bettys-rock',
@@ -109,28 +101,12 @@ const chapters: Chapter[] = [
     ],
   },
   {
-    badge: 'Chapter 4: The Innovation',
+    badge: 'Chapter 3: The Innovation',
     title: 'Trash into Treasure',
     text: "It's not about thinking recycling or reimaging but how to make trash into treasure on Mars with a few conditions as how can we make sure to be sustainable enough and beneficial extremely while minimizing the usage of water, energy input and microplastics not only that but have you ever imagined to turn your useless wastes into a new life on a planet you only want to discover? Or even some rocks around you to a great construction for a new life?",
     video: '/videos/waste.mp4',
     icon: RecyclingIcon,
     highlights: ['Zero Waste Goal', 'Resource Optimization', 'Sustainable Systems'],
-  },
-  {
-    badge: 'Chapter 5: The Solution',
-    title: 'Sustainable Water & Energy',
-    text: "Water is life, even on Mars. Our innovative system extracts water from Martian ice and recycles every drop through advanced filtration. Solar panels combined with nuclear power ensure continuous energy supply. Smart sensors monitor resource usage in real-time, optimizing efficiency while minimizing environmental impact.",
-    video: '/videos/water.mp4',
-    icon: WaterDropIcon,
-    highlights: ['Water Recycling', 'Solar & Nuclear Power', 'Smart Monitoring'],
-  },
-  {
-    badge: 'Chapter 6: The Future',
-    title: 'Building a New Life',
-    text: "Imagine constructing habitats from Martian regolith, growing food in controlled environments, and creating a self-sustaining colony. Every piece of waste becomes a building block. Every challenge becomes an opportunity for innovation. This is not just about surviving on Mars—it's about thriving and creating a new chapter in human history.",
-    video: '/videos/future.mp4',
-    icon: RocketLaunchIcon,
-    highlights: ['Martian Construction', 'Food Production', 'Self-Sustaining Colony'],
   },
 ];
 
@@ -426,7 +402,7 @@ const JourneyPage: React.FC = () => {
               sx={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: '1000px',
+                maxWidth: '1400px',
                 margin: '0 auto',
                 borderRadius: '16px',
                 overflow: 'hidden',
@@ -444,6 +420,8 @@ const JourneyPage: React.FC = () => {
                 sx={{
                   width: '100%',
                   height: 'auto',
+                  maxHeight: '70vh',
+                  objectFit: 'contain',
                   display: 'block',
                 }}
               />
