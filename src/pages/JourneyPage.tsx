@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, Chip, IconButton, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import ScienceIcon from '@mui/icons-material/Science';
 import RecyclingIcon from '@mui/icons-material/Recycling';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import PublicIcon from '@mui/icons-material/Public';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
