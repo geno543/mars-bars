@@ -253,7 +253,7 @@ const LandingPage: React.FC = () => {
               '0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(200, 63, 18, 0.4)',
           }}
         >
-          A sustainable waste management system for Mars' Jezero Crater
+          A sustainable waste infrastructure system to turn trash into treasure on Jezero Crater ( Your new habitat : Mars )
         </Typography>
 
         {/* Buttons */}

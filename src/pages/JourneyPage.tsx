@@ -414,7 +414,7 @@ const JourneyPage: React.FC = () => {
                   transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
                 }}
               >
-                🔍 Click the glowing hotspots to explore Mars resources
+                Click the glowing hotspots to explore Mars resources
               </Typography>
               <Box
                 sx={{
@@ -885,7 +885,7 @@ const JourneyPage: React.FC = () => {
                 textTransform: 'uppercase',
               }}
             >
-              📊 Extractable Resources
+              Extractable Resources
             </Typography>
           </Box>
         </DialogContent>
