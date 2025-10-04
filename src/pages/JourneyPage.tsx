@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, Chip, IconButton, Tooltip } from '@mui/material';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
@@ -74,66 +74,17 @@ const chapters: Chapter[] = [
 const JourneyPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentChapter, setCurrentChapter] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  // Remove animations - commented out for better text visibility
-  // useEffect(() => {
-  //   // Animate entrance
-  //   gsap.from(contentRef.current, {
-  //     opacity: 0,
-  //     y: 50,
-  //     duration: 1,
-  //     ease: 'power2.out',
-  //   });
-
-  //   // Floating eye animation
-  //   gsap.to(eyeRef.current, {
-  //     y: -15,
-  //     duration: 3,
-  //     ease: 'power1.inOut',
-  //     yoyo: true,
-  //     repeat: -1,
-  //   });
-
-  //   // Orb animations
-  //   gsap.to(orb1Ref.current, {
-  //     y: -20,
-  //     x: 20,
-  //     duration: 4,
-  //     ease: 'power1.inOut',
-  //     yoyo: true,
-  //     repeat: -1,
-  //   });
-
-  //   gsap.to(orb2Ref.current, {
-  //     y: 15,
-  //     x: -15,
-  //     duration: 5,
-  //     ease: 'power1.inOut',
-  //     yoyo: true,
-  //     repeat: -1,
-  //     delay: 1,
-  //   });
-
-  //   gsap.to(orb3Ref.current, {
-  //     y: -10,
-  //     x: 10,
-  //     duration: 6,
-  //     ease: 'power1.inOut',
-  //     yoyo: true,
-  //     repeat: -1,
-  //     delay: 2,
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   // Animate chapter transition
-  //   gsap.from(contentRef.current, {
-  //     opacity: 0,
-  //     x: 50,
-  //     duration: 0.6,
-  //     ease: 'back.out(1.7)',
-  //   });
-  // }, [currentChapter]);
+  // Trigger animation on chapter change
+  useEffect(() => {
+    setIsAnimating(true);
+    const timer = setTimeout(() => {
+      setIsAnimating(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [currentChapter]);
 
   const handleNextChapter = () => {
     if (currentChapter < chapters.length - 1) {
@@ -167,6 +118,8 @@ const JourneyPage: React.FC = () => {
             height: '100%',
             zIndex: 1,
             overflow: 'hidden',
+            opacity: isAnimating ? 0 : 1,
+            transition: 'opacity 0.8s ease-in-out',
           }}
         >
           <video
@@ -327,6 +280,9 @@ const JourneyPage: React.FC = () => {
                 'radial-gradient(circle, rgba(200, 63, 18, 0.3) 0%, rgba(200, 63, 18, 0.1) 100%)',
               backdropFilter: 'blur(10px)',
               border: '2px solid rgba(255, 242, 135, 0.3)',
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating ? 'scale(0.5) rotate(-180deg)' : 'scale(1) rotate(0deg)',
+              transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
             }}
           >
             {currentChapterData.icon && React.createElement(currentChapterData.icon, {
@@ -340,10 +296,14 @@ const JourneyPage: React.FC = () => {
 
         {/* Content Container */}
         <Box
+          ref={contentRef}
           sx={{
             maxWidth: '900px',
             width: '100%',
             textAlign: 'center',
+            opacity: isAnimating ? 0 : 1,
+            transform: isAnimating ? 'translateY(30px)' : 'translateY(0)',
+            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           {/* Badge */}
@@ -357,6 +317,9 @@ const JourneyPage: React.FC = () => {
               border: '1px solid rgba(255, 242, 135, 0.3)',
               marginBottom: { xs: 1.5, md: 2 },
               boxShadow: '0 8px 32px rgba(200, 63, 18, 0.2)',
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating ? 'translateX(-50px)' : 'translateX(0)',
+              transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s',
             }}
           >
             <Typography
@@ -384,6 +347,9 @@ const JourneyPage: React.FC = () => {
               marginBottom: { xs: 1.5, md: 2.5 },
               lineHeight: 1.2,
               textShadow: '0 0 40px rgba(255, 242, 135, 0.3)',
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating ? 'scale(0.9)' : 'scale(1)',
+              transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
             }}
           >
             {currentChapterData.title}
@@ -398,6 +364,9 @@ const JourneyPage: React.FC = () => {
               lineHeight: 1.6,
               marginBottom: { xs: 2, md: 3 },
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating ? 'translateY(20px)' : 'translateY(0)',
+              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
             }}
           >
             {currentChapterData.text}
@@ -427,7 +396,9 @@ const JourneyPage: React.FC = () => {
                     border: '1px solid rgba(255, 242, 135, 0.4)',
                     color: '#FFF287',
                     boxShadow: '0 4px 16px rgba(200, 63, 18, 0.2)',
-                    transition: 'all 0.3s ease',
+                    opacity: isAnimating ? 0 : 1,
+                    transform: isAnimating ? 'translateY(20px) scale(0.8)' : 'translateY(0) scale(1)',
+                    transition: `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${0.4 + index * 0.1}s`,
                     '&:hover': {
                       background: 'rgba(255, 242, 135, 0.25)',
                       transform: 'translateY(-2px)',
@@ -448,6 +419,9 @@ const JourneyPage: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: { xs: 2, md: 3 },
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating ? 'translateY(30px)' : 'translateY(0)',
+              transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.5s',
             }}
           >
             {/* Back Button */}
@@ -550,6 +524,8 @@ const JourneyPage: React.FC = () => {
               gap: 2,
               alignItems: 'center',
               justifyContent: 'center',
+              opacity: isAnimating ? 0 : 1,
+              transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.6s',
             }}
           >
             {chapters.map((_, index) => (
