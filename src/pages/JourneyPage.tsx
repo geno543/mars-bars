@@ -699,7 +699,7 @@ const JourneyPage: React.FC = () => {
             {isLastChapter && (
               <Button
                 variant="contained"
-                endIcon={<RocketLaunchIcon />}
+                endIcon={<ArrowForwardIcon />}
                 sx={{
                   minWidth: { xs: '280px', md: '240px' },
                   padding: { xs: '16px 36px', md: '18px 40px' },
@@ -909,7 +909,6 @@ const JourneyPage: React.FC = () => {
                 transform: 'translateY(-3px)',
                 boxShadow: '0 10px 30px rgba(255, 242, 135, 0.5)',
                 borderColor: '#FFF287',
-                boxShadow: '0 6px 24px rgba(255, 242, 135, 0.5)',
               },
               transition: 'all 0.3s ease',
             }}
