@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Button, Chip, IconButton, Tooltip } from '@mui/material';
+import { Box, Typography, Button, Chip, IconButton, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ScienceIcon from '@mui/icons-material/Science';
@@ -10,14 +10,28 @@ import PublicIcon from '@mui/icons-material/Public';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HomeIcon from '@mui/icons-material/Home';
+import TerrainIcon from '@mui/icons-material/Terrain';
+import CloseIcon from '@mui/icons-material/Close';
+
+interface Hotspot {
+  id: string;
+  x: number;
+  y: number;
+  radius: number;
+  title: string;
+  details: string;
+}
 
 interface Chapter {
   badge: string;
   title: string;
-  text: string;
+  text?: string;
   video?: string;
   icon?: any;
   highlights?: string[];
+  isInteractive?: boolean;
+  marsImage?: string;
+  hotspots?: Hotspot[];
 }
 
 const chapters: Chapter[] = [
@@ -44,6 +58,55 @@ const chapters: Chapter[] = [
     video: '/videos/mars-environment.mp4',
     icon: ScienceIcon,
     highlights: ['Extreme Temperatures', 'Thin Atmosphere', 'Radiation Exposure'],
+  },
+  {
+    badge: 'Interactive Exploration',
+    title: 'Explore Mars Resources',
+    isInteractive: true,
+    icon: TerrainIcon,
+    marsImage: '/src/images/jazero.jpg',
+    hotspots: [
+      {
+        id: 'bettys-rock',
+        x: 14,
+        y: 41,
+        radius: 4,
+        title: "Betty's Rock (Mafic Basalt)",
+        details: "Basalt is ideal for extracting oxygen via molten regolith electrolysis or hydrogen reduction. Crushed rock can be used in construction. Resources: Carbon (trace carbonate/CO₂), Oxygen (metal oxides), Water (from hydrated soil/minerals)."
+      },
+      {
+        id: 'regolith',
+        x: 37,
+        y: 55,
+        radius: 5,
+        title: "Martian Regolith",
+        details: "Process for oxygen (from silicates/oxides), carbon (as carbonates/CO₂), and water (via heating). Surplus regolith can be repurposed for bricks or shielding."
+      },
+      {
+        id: 'rock-cluster',
+        x: 62.5,
+        y: 46.5,
+        radius: 3,
+        title: "Igneous Rock Cluster",
+        details: "Provides oxygen in mineral form. Post-processing, usable in in-situ construction materials."
+      },
+      {
+        id: 'distant-boulder',
+        x: 54,
+        y: 15,
+        radius: 3,
+        title: "Distant Boulder",
+        details: "Represents more challenging targets for resource extraction and bulk construction use."
+      },
+      {
+        id: 'sand-area',
+        x: 89,
+        y: 68,
+        radius: 4.5,
+        title: "Martian Sand",
+        details: "Heated to extract water and some oxygen. Residue used for lightweight, insulating bricks or fills."
+      }
+    ],
   },
   {
     badge: 'Chapter 4: The Innovation',
@@ -76,10 +139,12 @@ const JourneyPage: React.FC = () => {
   const [currentChapter, setCurrentChapter] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
 
   // Trigger animation on chapter change
   useEffect(() => {
     setIsAnimating(true);
+    setSelectedHotspot(null);
     const timer = setTimeout(() => {
       setIsAnimating(false);
     }, 800);
@@ -355,22 +420,100 @@ const JourneyPage: React.FC = () => {
             {currentChapterData.title}
           </Typography>
 
-          {/* Text */}
-          <Typography
-            sx={{
-              fontSize: { xs: '13px', sm: '14px', md: '16px' },
-              fontWeight: 400,
-              color: '#FFFFFF',
-              lineHeight: 1.6,
-              marginBottom: { xs: 2, md: 3 },
-              textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
-              opacity: isAnimating ? 0 : 1,
-              transform: isAnimating ? 'translateY(20px)' : 'translateY(0)',
-              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
-            }}
-          >
-            {currentChapterData.text}
-          </Typography>
+          {/* Text or Interactive Content */}
+          {currentChapterData.isInteractive ? (
+            <Box
+              sx={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '1000px',
+                margin: '0 auto',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                boxShadow: '0 12px 48px rgba(0, 0, 0, 0.6)',
+                border: '2px solid rgba(255, 242, 135, 0.3)',
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
+              }}
+            >
+              <Box
+                component="img"
+                src={currentChapterData.marsImage}
+                alt="Mars Surface"
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+              {currentChapterData.hotspots?.map((hotspot) => (
+                <Box
+                  key={hotspot.id}
+                  onClick={() => setSelectedHotspot(hotspot)}
+                  sx={{
+                    position: 'absolute',
+                    left: `${hotspot.x}%`,
+                    top: `${hotspot.y}%`,
+                    width: `${hotspot.radius * 2}%`,
+                    height: `${hotspot.radius * 2}%`,
+                    borderRadius: '50%',
+                    border: '3px solid #FFF287',
+                    backgroundColor: 'rgba(255, 242, 135, 0.2)',
+                    transform: 'translate(-50%, -50%)',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    animation: 'pulse 2s ease-in-out infinite',
+                    '@keyframes pulse': {
+                      '0%, 100%': {
+                        boxShadow: '0 0 0 0 rgba(255, 242, 135, 0.7)',
+                      },
+                      '50%': {
+                        boxShadow: '0 0 0 20px rgba(255, 242, 135, 0)',
+                      },
+                    },
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 242, 135, 0.4)',
+                      borderColor: '#C83F12',
+                      borderWidth: '4px',
+                      transform: 'translate(-50%, -50%) scale(1.2)',
+                      zIndex: 10,
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: '#FFF287',
+                      boxShadow: '0 0 10px rgba(255, 242, 135, 0.8)',
+                    }}
+                  />
+                </Box>
+              ))}
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                fontSize: { xs: '13px', sm: '14px', md: '16px' },
+                fontWeight: 400,
+                color: '#FFFFFF',
+                lineHeight: 1.6,
+                marginBottom: { xs: 2, md: 3 },
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? 'translateY(20px)' : 'translateY(0)',
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
+              }}
+            >
+              {currentChapterData.text}
+            </Typography>
+          )}
 
           {/* Highlights Section */}
           {currentChapterData.highlights && (
@@ -559,6 +702,96 @@ const JourneyPage: React.FC = () => {
           </Box>
         </Box>
       </Box>
+
+      {/* Hotspot Details Dialog */}
+      <Dialog
+        open={selectedHotspot !== null}
+        onClose={() => setSelectedHotspot(null)}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{
+          sx: {
+            background: 'linear-gradient(135deg, rgba(59, 6, 10, 0.98) 0%, rgba(138, 0, 0, 0.98) 100%)',
+            backdropFilter: 'blur(20px)',
+            border: '2px solid rgba(255, 242, 135, 0.3)',
+            borderRadius: '20px',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.8)',
+          },
+        }}
+      >
+        <DialogTitle
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottom: '1px solid rgba(255, 242, 135, 0.2)',
+            pb: 2,
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+              background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            {selectedHotspot?.title}
+          </Typography>
+          <IconButton
+            onClick={() => setSelectedHotspot(null)}
+            sx={{
+              color: '#FFF287',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 242, 135, 0.1)',
+                transform: 'rotate(90deg)',
+              },
+              transition: 'all 0.3s ease',
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ pt: 3, pb: 3 }}>
+          <Typography
+            sx={{
+              color: '#FFFFFF',
+              fontSize: '16px',
+              lineHeight: 1.8,
+              textAlign: 'justify',
+            }}
+          >
+            {selectedHotspot?.details}
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ p: 3, pt: 0 }}>
+          <Button
+            onClick={() => setSelectedHotspot(null)}
+            variant="contained"
+            fullWidth
+            sx={{
+              background: 'linear-gradient(135deg, #C83F12 0%, #8A0000 100%)',
+              color: '#FFF',
+              padding: '12px 32px',
+              fontSize: '16px',
+              fontWeight: 600,
+              borderRadius: '12px',
+              textTransform: 'none',
+              boxShadow: '0 4px 16px rgba(200, 63, 18, 0.4)',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
+                transform: 'translateY(-2px)',
+                boxShadow: '0 6px 24px rgba(255, 242, 135, 0.5)',
+              },
+              transition: 'all 0.3s ease',
+            }}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
