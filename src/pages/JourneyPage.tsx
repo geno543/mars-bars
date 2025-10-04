@@ -277,7 +277,9 @@ const JourneyPage: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: { xs: '40px 20px', md: '60px 40px' },
+          padding: { xs: '20px 15px', md: '30px 40px' },
+          transform: 'scale(0.85)',
+          transformOrigin: 'center center',
         }}
       >
         {/* Back Button */}
@@ -314,9 +316,9 @@ const JourneyPage: React.FC = () => {
           <Box
             className="animate-ripple"
             sx={{
-              marginBottom: { xs: 4, md: 6 },
-              width: { xs: '100px', md: '140px' },
-              height: { xs: '100px', md: '140px' },
+              marginBottom: { xs: 2, md: 3 },
+              width: { xs: '70px', md: '100px' },
+              height: { xs: '70px', md: '100px' },
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -329,7 +331,7 @@ const JourneyPage: React.FC = () => {
           >
             {currentChapterData.icon && React.createElement(currentChapterData.icon, {
               sx: {
-                fontSize: { xs: '50px', md: '70px' },
+                fontSize: { xs: '35px', md: '50px' },
                 color: '#FFF287',
               },
             })}
@@ -348,18 +350,18 @@ const JourneyPage: React.FC = () => {
           <Box
             sx={{
               display: 'inline-block',
-              padding: '10px 24px',
+              padding: '8px 20px',
               borderRadius: '50px',
               background: 'rgba(255, 242, 135, 0.15)',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 242, 135, 0.3)',
-              marginBottom: { xs: 3, md: 4 },
+              marginBottom: { xs: 1.5, md: 2 },
               boxShadow: '0 8px 32px rgba(200, 63, 18, 0.2)',
             }}
           >
             <Typography
               sx={{
-                fontSize: { xs: '12px', md: '14px' },
+                fontSize: { xs: '10px', md: '12px' },
                 fontWeight: 500,
                 color: '#FFF287',
                 letterSpacing: '1px',
@@ -373,13 +375,13 @@ const JourneyPage: React.FC = () => {
           {/* Title */}
           <Typography
             sx={{
-              fontSize: { xs: '36px', sm: '48px', md: '64px' },
+              fontSize: { xs: '28px', sm: '36px', md: '48px' },
               fontWeight: 800,
               background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              marginBottom: { xs: 3, md: 4 },
+              marginBottom: { xs: 1.5, md: 2.5 },
               lineHeight: 1.2,
               textShadow: '0 0 40px rgba(255, 242, 135, 0.3)',
             }}
@@ -390,11 +392,11 @@ const JourneyPage: React.FC = () => {
           {/* Text */}
           <Typography
             sx={{
-              fontSize: { xs: '16px', sm: '18px', md: '20px' },
+              fontSize: { xs: '13px', sm: '14px', md: '16px' },
               fontWeight: 400,
               color: '#FFFFFF',
-              lineHeight: 1.8,
-              marginBottom: { xs: 4, md: 6 },
+              lineHeight: 1.6,
+              marginBottom: { xs: 2, md: 3 },
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
             }}
           >
@@ -407,9 +409,9 @@ const JourneyPage: React.FC = () => {
               sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: 2,
+                gap: 1.5,
                 justifyContent: 'center',
-                marginBottom: { xs: 4, md: 6 },
+                marginBottom: { xs: 2, md: 3 },
               }}
             >
               {currentChapterData.highlights.map((highlight, index) => (
@@ -417,9 +419,9 @@ const JourneyPage: React.FC = () => {
                   key={index}
                   label={highlight}
                   sx={{
-                    fontSize: { xs: '13px', md: '15px' },
+                    fontSize: { xs: '11px', md: '13px' },
                     fontWeight: 600,
-                    padding: { xs: '20px 16px', md: '24px 20px' },
+                    padding: { xs: '16px 12px', md: '18px 14px' },
                     background: 'rgba(255, 242, 135, 0.15)',
                     backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(255, 242, 135, 0.4)',
@@ -442,10 +444,10 @@ const JourneyPage: React.FC = () => {
             sx={{
               display: 'flex',
               flexDirection: { xs: 'column', sm: 'row' },
-              gap: 2,
+              gap: 1.5,
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: { xs: 4, md: 6 },
+              marginBottom: { xs: 2, md: 3 },
             }}
           >
             {/* Back Button */}
