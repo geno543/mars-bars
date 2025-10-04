@@ -395,82 +395,173 @@ const JourneyPage: React.FC = () => {
 
           {/* Text or Interactive Content */}
           {currentChapterData.isInteractive ? (
-            <Box
-              sx={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '1400px',
-                margin: '0 auto',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 12px 48px rgba(0, 0, 0, 0.6)',
-                border: '2px solid rgba(255, 242, 135, 0.3)',
-                opacity: isAnimating ? 0 : 1,
-                transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
-              }}
-            >
-              <Box
-                component="img"
-                src={currentChapterData.marsImage}
-                alt="Mars Surface"
+            <Box sx={{ width: '100%' }}>
+              {/* Instruction Text */}
+              <Typography
                 sx={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: '70vh',
-                  objectFit: 'contain',
-                  display: 'block',
+                  fontSize: { xs: '13px', sm: '14px', md: '16px' },
+                  fontWeight: 500,
+                  color: '#FFF287',
+                  textAlign: 'center',
+                  marginBottom: 2,
+                  padding: '10px 20px',
+                  background: 'rgba(255, 242, 135, 0.1)',
+                  borderRadius: '50px',
+                  border: '1px solid rgba(255, 242, 135, 0.3)',
+                  backdropFilter: 'blur(10px)',
+                  display: 'inline-block',
+                  opacity: isAnimating ? 0 : 1,
+                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
                 }}
-              />
-              {currentChapterData.hotspots?.map((hotspot) => (
+              >
+                🔍 Click the glowing hotspots to explore Mars resources
+              </Typography>
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '1400px',
+                  margin: '0 auto',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 242, 135, 0.2)',
+                  border: '3px solid rgba(255, 242, 135, 0.4)',
+                  opacity: isAnimating ? 0 : 1,
+                  transform: isAnimating ? 'scale(0.95) translateY(20px)' : 'scale(1) translateY(0)',
+                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 24px 70px rgba(255, 242, 135, 0.3), 0 0 0 1px rgba(255, 242, 135, 0.4)',
+                    borderColor: 'rgba(255, 242, 135, 0.6)',
+                  },
+                }}
+              >
+                {/* Gradient Overlay */}
                 <Box
-                  key={hotspot.id}
-                  onClick={() => setSelectedHotspot(hotspot)}
                   sx={{
                     position: 'absolute',
-                    left: `${hotspot.x}%`,
-                    top: `${hotspot.y}%`,
-                    width: `${hotspot.radius * 2}%`,
-                    height: `${hotspot.radius * 2}%`,
-                    borderRadius: '50%',
-                    border: '3px solid #FFF287',
-                    backgroundColor: 'rgba(255, 242, 135, 0.2)',
-                    transform: 'translate(-50%, -50%)',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    animation: 'pulse 2s ease-in-out infinite',
-                    '@keyframes pulse': {
-                      '0%, 100%': {
-                        boxShadow: '0 0 0 0 rgba(255, 242, 135, 0.7)',
-                      },
-                      '50%': {
-                        boxShadow: '0 0 0 20px rgba(255, 242, 135, 0)',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.2) 100%)',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }}
+                />
+                <Box
+                  component="img"
+                  src={currentChapterData.marsImage}
+                  alt="Mars Surface"
+                  sx={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '70vh',
+                    objectFit: 'contain',
+                    display: 'block',
+                    filter: 'brightness(1.05) contrast(1.1)',
+                  }}
+                />
+              {currentChapterData.hotspots?.map((hotspot, index) => (
+                <Tooltip
+                  key={hotspot.id}
+                  title={hotspot.title}
+                  arrow
+                  placement="top"
+                  componentsProps={{
+                    tooltip: {
+                      sx: {
+                        bgcolor: 'rgba(59, 6, 10, 0.95)',
+                        color: '#FFF287',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        padding: '8px 16px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 242, 135, 0.3)',
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
                       },
                     },
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 242, 135, 0.4)',
-                      borderColor: '#C83F12',
-                      borderWidth: '4px',
-                      transform: 'translate(-50%, -50%) scale(1.2)',
-                      zIndex: 10,
+                    arrow: {
+                      sx: {
+                        color: 'rgba(59, 6, 10, 0.95)',
+                      },
                     },
                   }}
                 >
                   <Box
+                    onClick={() => setSelectedHotspot(hotspot)}
                     sx={{
                       position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '8px',
-                      height: '8px',
+                      left: `${hotspot.x}%`,
+                      top: `${hotspot.y}%`,
+                      width: `${hotspot.radius * 2}%`,
+                      height: `${hotspot.radius * 2}%`,
                       borderRadius: '50%',
-                      backgroundColor: '#FFF287',
-                      boxShadow: '0 0 10px rgba(255, 242, 135, 0.8)',
+                      border: '3px solid #FFF287',
+                      backgroundColor: 'rgba(255, 242, 135, 0.25)',
+                      transform: 'translate(-50%, -50%)',
+                      cursor: 'pointer',
+                      transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      animation: `pulse ${2 + index * 0.3}s ease-in-out infinite`,
+                      zIndex: 2,
+                      '@keyframes pulse': {
+                        '0%, 100%': {
+                          boxShadow: '0 0 0 0 rgba(255, 242, 135, 0.8), 0 0 20px rgba(255, 242, 135, 0.6)',
+                        },
+                        '50%': {
+                          boxShadow: '0 0 0 20px rgba(255, 242, 135, 0), 0 0 30px rgba(255, 242, 135, 0.4)',
+                        },
+                      },
+                      '&:hover': {
+                        backgroundColor: 'rgba(200, 63, 18, 0.5)',
+                        borderColor: '#C83F12',
+                        borderWidth: '4px',
+                        transform: 'translate(-50%, -50%) scale(1.3)',
+                        zIndex: 20,
+                        boxShadow: '0 0 30px rgba(255, 242, 135, 0.9), 0 0 60px rgba(200, 63, 18, 0.6)',
+                        animation: 'none',
+                      },
+                      '&:active': {
+                        transform: 'translate(-50%, -50%) scale(1.1)',
+                      },
                     }}
-                  />
-                </Box>
+                  >
+                    {/* Inner Dot */}
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        backgroundColor: '#FFF287',
+                        boxShadow: '0 0 15px rgba(255, 242, 135, 1), inset 0 0 5px rgba(200, 63, 18, 0.8)',
+                      }}
+                    />
+                    {/* Outer Ring */}
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '60%',
+                        height: '60%',
+                        borderRadius: '50%',
+                        border: '2px solid rgba(255, 242, 135, 0.5)',
+                        animation: 'rotate 3s linear infinite',
+                        '@keyframes rotate': {
+                          '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+                          '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' },
+                        },
+                      }}
+                    />
+                  </Box>
+                </Tooltip>
               ))}
+            </Box>
             </Box>
           ) : (
             <Typography
@@ -682,66 +773,123 @@ const JourneyPage: React.FC = () => {
       <Dialog
         open={selectedHotspot !== null}
         onClose={() => setSelectedHotspot(null)}
-        maxWidth="sm"
+        maxWidth="md"
         fullWidth
         PaperProps={{
           sx: {
-            background: 'linear-gradient(135deg, rgba(59, 6, 10, 0.98) 0%, rgba(138, 0, 0, 0.98) 100%)',
-            backdropFilter: 'blur(20px)',
-            border: '2px solid rgba(255, 242, 135, 0.3)',
-            borderRadius: '20px',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.8)',
+            background: 'linear-gradient(135deg, rgba(59, 6, 10, 0.98) 0%, rgba(138, 0, 0, 0.98) 50%, rgba(59, 6, 10, 0.98) 100%)',
+            backdropFilter: 'blur(30px)',
+            border: '3px solid rgba(255, 242, 135, 0.4)',
+            borderRadius: '24px',
+            boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9), 0 0 100px rgba(200, 63, 18, 0.3)',
+            overflow: 'hidden',
           },
         }}
+        TransitionProps={{
+          timeout: 400,
+        }}
       >
+        {/* Decorative Top Border */}
+        <Box
+          sx={{
+            height: '4px',
+            background: 'linear-gradient(90deg, transparent 0%, #FFF287 50%, transparent 100%)',
+            boxShadow: '0 0 20px rgba(255, 242, 135, 0.6)',
+          }}
+        />
         <DialogTitle
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            borderBottom: '1px solid rgba(255, 242, 135, 0.2)',
-            pb: 2,
+            borderBottom: '2px solid rgba(255, 242, 135, 0.2)',
+            pb: 2.5,
+            pt: 3,
+            px: 4,
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 700,
-              background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            {selectedHotspot?.title}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              sx={{
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
+                boxShadow: '0 0 20px rgba(255, 242, 135, 0.8)',
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
+            />
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 800,
+                fontSize: { xs: '20px', md: '24px' },
+                background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 30px rgba(255, 242, 135, 0.3)',
+              }}
+            >
+              {selectedHotspot?.title}
+            </Typography>
+          </Box>
           <IconButton
             onClick={() => setSelectedHotspot(null)}
             sx={{
               color: '#FFF287',
+              border: '2px solid rgba(255, 242, 135, 0.3)',
               '&:hover': {
-                backgroundColor: 'rgba(255, 242, 135, 0.1)',
-                transform: 'rotate(90deg)',
+                backgroundColor: 'rgba(200, 63, 18, 0.3)',
+                borderColor: '#C83F12',
+                transform: 'rotate(90deg) scale(1.1)',
               },
-              transition: 'all 0.3s ease',
+              transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
             }}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent sx={{ pt: 3, pb: 3 }}>
+        <DialogContent sx={{ pt: 4, pb: 3, px: 4 }}>
           <Typography
             sx={{
               color: '#FFFFFF',
-              fontSize: '16px',
-              lineHeight: 1.8,
-              textAlign: 'justify',
+              fontSize: { xs: '15px', md: '17px' },
+              lineHeight: 1.9,
+              textAlign: 'left',
+              mb: 3,
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
             }}
           >
             {selectedHotspot?.details}
           </Typography>
+          {/* Resource Badge */}
+          <Box
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
+              padding: '10px 20px',
+              borderRadius: '50px',
+              background: 'rgba(255, 242, 135, 0.1)',
+              border: '2px solid rgba(255, 242, 135, 0.3)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: '13px',
+                fontWeight: 700,
+                color: '#FFF287',
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+              }}
+            >
+              📊 Extractable Resources
+            </Typography>
+          </Box>
         </DialogContent>
-        <DialogActions sx={{ p: 3, pt: 0 }}>
+        <DialogActions sx={{ p: 4, pt: 0, gap: 2 }}>
           <Button
             onClick={() => setSelectedHotspot(null)}
             variant="contained"
@@ -749,15 +897,18 @@ const JourneyPage: React.FC = () => {
             sx={{
               background: 'linear-gradient(135deg, #C83F12 0%, #8A0000 100%)',
               color: '#FFF',
-              padding: '12px 32px',
-              fontSize: '16px',
-              fontWeight: 600,
-              borderRadius: '12px',
+              padding: '14px 32px',
+              fontSize: { xs: '15px', md: '17px' },
+              fontWeight: 700,
+              borderRadius: '16px',
               textTransform: 'none',
-              boxShadow: '0 4px 16px rgba(200, 63, 18, 0.4)',
+              border: '2px solid rgba(255, 242, 135, 0.2)',
+              boxShadow: '0 6px 24px rgba(200, 63, 18, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
               '&:hover': {
                 background: 'linear-gradient(135deg, #FFF287 0%, #C83F12 100%)',
-                transform: 'translateY(-2px)',
+                transform: 'translateY(-3px)',
+                boxShadow: '0 10px 30px rgba(255, 242, 135, 0.5)',
+                borderColor: '#FFF287',
                 boxShadow: '0 6px 24px rgba(255, 242, 135, 0.5)',
               },
               transition: 'all 0.3s ease',
