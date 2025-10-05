@@ -20,8 +20,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 interface MaterialData {
   inputMaterial: string;
   inputDescription: string;
+  inputImagePath: string;
   outputProduct: string;
   outputDescription: string;
+  outputImagePath: string;
   sustainability: number;
   rationale: string;
   source: string;
@@ -31,8 +33,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Uline Air Pillow Film',
     inputDescription: 'Thin, lightweight packaging made of medium- to high-density polyethylene (MDPE/HDPE), designed to trap air in sealed pockets for protective cushioning.',
+    inputImagePath: '/src/images/Air Pillow Film for Uline Air Cushion Machine.png',
     outputProduct: 'Insulation blankets',
     outputDescription: 'Use trapped air chambers to provide lightweight thermal insulation and reduce conductive heat transfer in habitats.',
+    outputImagePath: '/src/images/Insulation blankets.png',
     sustainability: 88,
     rationale: 'Reused with low-energy mechanical processing. Useful for habitat insulation on Mars.',
     source: 'NASA Glenn Research Center — Advanced Materials for Space Structures (2020)',
@@ -40,8 +44,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Aluminum Steam Table Pans',
     inputDescription: 'Lightweight, disposable containers made from thin-gauge aluminum foil.',
+    inputImagePath: '/src/images/Aluminum Steam Table Pans - Full Size ( Structural Elements).png',
     outputProduct: 'Reflective heat shields',
     outputDescription: "Aluminum's high infrared reflectivity and thermal conductivity protects habitats and rovers by deflecting radiant heat.",
+    outputImagePath: '/src/images/Reflective heat shields.png',
     sustainability: 92,
     rationale: 'Aluminum re-melted with low loss.',
     source: 'The Aluminum Association – Recycling Facts (2021)',
@@ -49,8 +55,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Anti-static Bubble Bags',
     inputDescription: 'Low-density polyethylene film embedded with antistatic agents for cushioning electronic components and dissipating static charges.',
+    inputImagePath: '/src/images/Anti-Static Bubble Bags.jpg',
     outputProduct: 'Padded tool wraps',
     outputDescription: 'Provide mechanical shock absorption and reduce electrostatic buildup protecting sensitive instruments.',
+    outputImagePath: '/src/images/Padded tool wraps.png',
     sustainability: 75,
     rationale: 'Reused LDPE bubble bags.',
     source: 'EPA – Plastics Recycling Facts (2020)',
@@ -58,8 +66,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Carbon Fiber Sheet + Epoxy Resin',
     inputDescription: 'Composite of high-strength carbon fibers embedded in epoxy matrix, non-remeltable.',
+    inputImagePath: '/src/images/Carbon Fiber Sheet & Epoxy Resin Kit ( structural elements).jpg',
     outputProduct: 'Tool handles & repair patches',
     outputDescription: 'Mechanically reshaped for repairs; strong adhesive bonding but requires handling safety precautions.',
+    outputImagePath: '/src/images/Tool ahndles and repair patches.avif',
     sustainability: 40,
     rationale: 'Epoxy cannot be remelted; mechanical reuse only.',
     source: 'ScienceDirect – Recycling of CFRP Composites (2022)',
@@ -67,8 +77,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'CEL Kynar Gas Sampling Bags',
     inputDescription: 'Flexible polyvinylidene fluoride (PVDF) fluoropolymer bags with excellent gas barrier and chemical resistance.',
+    inputImagePath: '/src/images/CEL Scientific Kynar Gas Sampling Gas.jpg',
     outputProduct: 'Flexible containment bladders',
     outputDescription: 'Used for safe storage and transport of fluids or gases under variable conditions.',
+    outputImagePath: '/src/images/Flexible containment bladders.png',
     sustainability: 65,
     rationale: 'PVDF durable; moderately recyclable.',
     source: 'Arkema – PVDF Technical Recycling Data (2021)',
@@ -76,8 +88,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Mixed Cotton Clothing',
     inputDescription: 'Textile blend of natural cotton and synthetic polymers like polyester, durable and breathable.',
+    inputImagePath: '/src/images/Clothing example ( Hanes men undershirt ) Fabrics.png',
     outputProduct: 'Patch kits',
     outputDescription: 'Fabric reinforcements for clothing and equipment, extending their life.',
+    outputImagePath: '/src/images/Patch kits.png',
     sustainability: 85,
     rationale: 'Cotton reused with low processing.',
     source: 'Textile Recycling Association Report (2020)',
@@ -85,8 +99,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Glenroy White Ready Seal 225',
     inputDescription: 'Multi-layer flexible film with PET, LDPE, Surlyn sealant providing high barrier and sealing.',
+    inputImagePath: '/src/images/Glenroy White Ready Seal 225 Food Packaging.png',
     outputProduct: 'Lightproof pouches',
     outputDescription: 'Protect samples and food from light exposure and contamination.',
+    outputImagePath: '/src/images/Lightproof pouches.png',
     sustainability: 60,
     rationale: 'Multi-layer film reused, moderate sustainability.',
     source: 'Flexible Packaging Association (2021)',
@@ -94,8 +110,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Magid NOM10 White Hood',
     inputDescription: 'Flame-resistant aramid Nomex fiber with thermal stability and high strength.',
+    inputImagePath: '/src/images/Magid NOM10 Nomex White Hood ( EVA Waste ).jpg',
     outputProduct: 'Heat-shield patches & filter pre-covers',
     outputDescription: 'Flame-resistant, thermally stable fabric patches and pre-filters protecting habitat and equipment.',
+    outputImagePath: '/src/images/Filter pre-cover for dusty air by Magid NOM10 Nomex White Hood.png',
     sustainability: 78,
     rationale: 'Durable, flame-resistant Nomex reused for protective patches.',
     source: 'DuPont – Nomex Technical Guide (2020)',
@@ -103,8 +121,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Nitrile Gloves',
     inputDescription: 'Disposable synthetic rubber gloves (NBR) with puncture and chemical resistance, hypoallergenic.',
+    inputImagePath: '/src/images/Nitrile gloves.jpg',
     outputProduct: '3D-printable pallets/filaments',
     outputDescription: 'Processed into 3D-printable feeds after devulcanization for extrusion-grade materials.',
+    outputImagePath: '/src/images/Gaskets and seals by Nitrile gloves.png',
     sustainability: 58,
     rationale: 'Challenging to recycle but grindable to feedstock.',
     source: 'Scientific Reports – Recycling Nitrile Gloves (2023)',
@@ -112,8 +132,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Mixed Cotton Clothing (Thermal insulation)',
     inputDescription: 'Cotton/polyester blend used for insulation panels and spacesuit layers.',
+    inputImagePath: '/src/images/R&R Textile Wash Cloth (Fabrics).jpg',
     outputProduct: 'Thermal insulation panels & suits',
     outputDescription: 'Panels and layers with high sustainability and insulation properties for Mars habitats.',
+    outputImagePath: '/src/images/Insulation blankets.png',
     sustainability: 85,
     rationale: 'Highly sustainable insulation and spacesuit layers.',
     source: 'Journal of Industrial Textiles – Cotton Fiber Recycling (2021)',
@@ -121,8 +143,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Mixed Cotton Clothing (Biochar)',
     inputDescription: 'Cotton textiles pyrolyzed in oxygen-limited conditions to produce biochar.',
+    inputImagePath: '/src/images/Clothing example ( Hanes men undershirt ) Fabrics.png',
     outputProduct: 'Biochar',
     outputDescription: 'Biochar used for filtration and soil amendment applications on Mars.',
+    outputImagePath: '/src/images/Mars Rocknest Soil.avif',
     sustainability: 80,
     rationale: 'Pyrolyzed cotton transforms waste into useful biochar for soil and filtration.',
     source: 'Scientific Reports – Biochar from Textile Waste (2022)',
@@ -130,8 +154,10 @@ const materialsData: MaterialData[] = [
   {
     inputMaterial: 'Zotefoams Plastazote LD45FR',
     inputDescription: 'Flame-retardant, closed-cell polyethylene foam with shock absorption and insulation.',
+    inputImagePath: '/src/images/Zotefoams Plastazote LD45FR.jpg',
     outputProduct: 'Thermal insulation panels',
     outputDescription: 'Lightweight fire-retardant panels used to insulate walls and spacesuits.',
+    outputImagePath: '/src/images/Insulation blankets.png',
     sustainability: 86,
     rationale: 'Mechanically repurposed polyethylene foam for insulation.',
     source: 'Zotefoams – Recycling and Technical Data (2020)',
@@ -379,6 +405,51 @@ const SpecificSolutionsPage: React.FC = () => {
                   <Grid container spacing={4} alignItems="center">
                     {/* Left Column - Input */}
                     <Grid item xs={12} md={5}>
+                      {/* Input Material Image Display */}
+                      <Box
+                        sx={{
+                          width: '100%',
+                          height: '180px',
+                          mb: 2.5,
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          border: '2px solid rgba(200, 63, 18, 0.2)',
+                          background: 'linear-gradient(135deg, rgba(200, 63, 18, 0.05) 0%, rgba(200, 63, 18, 0.02) 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          position: 'relative',
+                          boxShadow: '0 4px 16px rgba(200, 63, 18, 0.1)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: 'rgba(200, 63, 18, 0.4)',
+                            boxShadow: '0 6px 24px rgba(200, 63, 18, 0.2)',
+                            transform: 'scale(1.02)',
+                          },
+                        }}
+                      >
+                        <img
+                          src={material.inputImagePath}
+                          alt={material.inputMaterial}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                          }}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              const placeholder = document.createElement('div');
+                              placeholder.style.cssText = 'width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(200, 63, 18, 0.4); font-size: 14px; gap: 8px;';
+                              placeholder.innerHTML = '<div style="font-size: 40px;">📦</div><div>Image placeholder</div>';
+                              parent.appendChild(placeholder);
+                            }
+                          }}
+                        />
+                      </Box>
+
                       <Box
                         sx={{
                           display: 'flex',
@@ -500,6 +571,51 @@ const SpecificSolutionsPage: React.FC = () => {
 
                     {/* Right Column - Output */}
                     <Grid item xs={12} md={5}>
+                      {/* Output Product Image Display */}
+                      <Box
+                        sx={{
+                          width: '100%',
+                          height: '180px',
+                          mb: 2.5,
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          border: '2px solid rgba(16, 185, 129, 0.2)',
+                          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          position: 'relative',
+                          boxShadow: '0 4px 16px rgba(16, 185, 129, 0.1)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: 'rgba(16, 185, 129, 0.4)',
+                            boxShadow: '0 6px 24px rgba(16, 185, 129, 0.2)',
+                            transform: 'scale(1.02)',
+                          },
+                        }}
+                      >
+                        <img
+                          src={material.outputImagePath}
+                          alt={material.outputProduct}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                          }}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              const placeholder = document.createElement('div');
+                              placeholder.style.cssText = 'width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(16, 185, 129, 0.4); font-size: 14px; gap: 8px;';
+                              placeholder.innerHTML = '<div style="font-size: 40px;">🖼️</div><div>Image placeholder</div>';
+                              parent.appendChild(placeholder);
+                            }
+                          }}
+                        />
+                      </Box>
+
                       <Box
                         sx={{
                           display: 'flex',
