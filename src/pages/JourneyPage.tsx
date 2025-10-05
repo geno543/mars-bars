@@ -125,7 +125,7 @@ const chapters: Chapter[] = [
     badge: 'Chapter 3: The Innovation',
     title: 'Trash into Treasure',
     text: "It's not about thinking recycling or reimaging but how to make trash into treasure on Mars with a few conditions as how can we make sure to be sustainable enough and beneficial extremely while minimizing the usage of water, energy input and microplastics not only that but have you ever imagined to turn your useless wastes into a new life on a planet you only want to discover? Or even some rocks around you to a great construction for a new life?",
-    video: '/videos/waste.mp4',
+    video: '/videos/last.mp4',
     icon: RecyclingIcon,
     highlights: ['Zero Waste Goal', 'Resource Optimization', 'Sustainable Systems'],
   },
