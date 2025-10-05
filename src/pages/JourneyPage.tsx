@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HomeIcon from '@mui/icons-material/Home';
 import TerrainIcon from '@mui/icons-material/Terrain';
 import CloseIcon from '@mui/icons-material/Close';
+import QuizIcon from '@mui/icons-material/Quiz';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import ScienceIcon from '@mui/icons-material/Science';
@@ -1204,11 +1205,12 @@ const JourneyPage: React.FC = () => {
               </Button>
             )}
 
-            {/* Final Button */}
+            {/* Final Button - Take Exam */}
             {isLastChapter && (
               <Button
                 variant="contained"
-                endIcon={<ArrowForwardIcon />}
+                onClick={() => navigate('/exam')}
+                startIcon={<QuizIcon />}
                 sx={{
                   minWidth: { xs: '280px', md: '240px' },
                   padding: { xs: '16px 36px', md: '18px 40px' },
@@ -1230,7 +1232,7 @@ const JourneyPage: React.FC = () => {
                   },
                 }}
               >
-                Complete Journey
+                Take the Exam
               </Button>
             )}
           </Box>

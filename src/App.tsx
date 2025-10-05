@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage';
 import JourneyPage from './pages/JourneyPage';
 import SystemPage from './pages/SystemPage';
 import SpecificSolutionsPage from './pages/SpecificSolutionsPage';
+import ExamPage from './pages/ExamPage';
 
 // Create custom Mars theme
 const theme = createTheme({
@@ -50,6 +51,7 @@ const App: React.FC = () => {
           <Route path="/journey" element={<JourneyPage />} />
           <Route path="/system" element={<SystemPage />} />
           <Route path="/specific-solutions" element={<SpecificSolutionsPage />} />
+          <Route path="/exam" element={<ExamPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
